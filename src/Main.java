@@ -28,8 +28,11 @@ public class Main {
         while (!exit) {
             System.out.println("\nPlease select an option:");
             System.out.println("1. Insert a node");
-            System.out.println("2. Preorder traversal");
-            System.out.println("3. Exit");
+            System.out.println("2. Delete a node");
+            System.out.println("3. Show me the results so far (visit the tree in 'preorder traversal')");
+            System.out.println("4. Exit");
+            System.out.println();
+            System.out.println("------------------------------------------------------------------------");
 
             int option = scanner.nextInt();
 
@@ -40,12 +43,24 @@ public class Main {
                     tree.root = tree.insert(tree.root, number);
                     break;
                 case 2:
-                    System.out.println("Preorder traversal of constructed tree is : ");
-                    tree.preOrder(tree.root);
-                    System.out.println("Level order traversal of constructed tree is : ");
-                    tree.printLevelOrder();
+                    System.out.println("Please enter a number to delete from the tree:");
+                    int num = scanner.nextInt();
+                    if(tree.search(tree.root, num) != null) { // Verifica se o nó existe antes de tentar deletá-lo
+                        tree.root = tree.deleteNode(tree.root, num);
+                        System.out.println("Node with key " + num + " has been deleted.");
+                    } else {
+                        System.out.println("This node does not exist. The existing nodes are: ");
+                        tree.preOrder(tree.root); // Lista todos os nós existentes
+                    }
                     break;
                 case 3:
+                    System.out.println("Preorder traversal of constructed tree is : ");
+                    tree.preOrder(tree.root);
+                    System.out.println();
+                    System.out.println("The level order of the tree is : ");
+                    tree.printLevelOrder();
+                    break;
+                case 4:
                     exit = true;
                     break;
                 default:

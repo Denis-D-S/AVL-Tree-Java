@@ -25,4 +25,17 @@ public class AVLUtils {
 
         return getHeight(N.left) - getHeight(N.right);
     }
+
+    //MÉTODO QUE RETORNA O NÓ COM O MENOR VALOR ENCONTRADO NA ÁRVORE
+    public static Node minValueNode(Node node)
+    {
+        Node current = node;
+
+        /* loop down to find the leftmost leaf */
+        while (current.left != null)
+            current = current.left;
+
+        return current;
+    }
+
 }
